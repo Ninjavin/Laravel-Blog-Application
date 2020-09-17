@@ -52,7 +52,7 @@ class PostsController extends Controller
         // Handle File
         if($request->hasFile('cover_image')){
             // Get filename with the extension
-            $filenameWithExt = $request->file->getClientOriginalName();
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
             // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get just ext
@@ -60,7 +60,7 @@ class PostsController extends Controller
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            $path = $request->file('cover_image')->storeAs('cover_images', $fileNameToStore, 'public');
 		
         }else{
             $fileNameToStore = 'noimage.jpg';
